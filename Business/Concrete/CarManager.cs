@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace Business.Concrete
             {
                 Console.WriteLine("Araba fiyatı 0'dan fazla olmalıdır");
             }
+        }
+
+        public List<CarDetailDto> carDetailDtos()
+        {
+           return _carDal.GetCarDetail();
         }
 
         public List<Car> GetAll()
