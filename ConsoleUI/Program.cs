@@ -15,10 +15,12 @@ namespace ConsoleUI
             //    Console.WriteLine(data.ModelYear);
             //}
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var item in carManager.carDetailDtos())
+            var result = carManager.carDetailDtos();
+            foreach (var item in result.Data)
             {
                 Console.WriteLine(item.BrandName + " " + item.CarId + " " + item.ColorName);
             }
+            Console.WriteLine(result.Messages);
 
         }
     }
