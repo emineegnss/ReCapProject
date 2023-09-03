@@ -48,6 +48,8 @@ namespace Business.Concrete
 
         }
 
+       
+
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 23)

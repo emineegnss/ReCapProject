@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Entities;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -14,6 +15,8 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityReposiyoryBase<Car, CarDbContext>, ICarDal
     {
+      
+
         public List<CarDetailDto> GetCarDetail()
         {
             using (CarDbContext context = new CarDbContext())
