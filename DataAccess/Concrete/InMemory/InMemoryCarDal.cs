@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -46,9 +47,9 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public List<Car> GetById(int carId)
+        public Car GetById(int carId)
         {
-            return _cars.Where(c => c.ColorId == carId).ToList();
+            return _cars.FirstOrDefault(c => c.ColorId == carId);
         }
 
         public List<Car> GetById(Expression<Func<Car, bool>> filter)
@@ -70,6 +71,11 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.Description = car.Description;
             
+        }
+
+        Car IEntityRepository<Car>.GetById(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

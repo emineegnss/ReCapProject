@@ -27,12 +27,14 @@ namespace Business.Concrete
            if (car.DailyPrice > 0)
             {
                 _carDal.Add(car);
-                return new ErrorResult(Messages.Error);
+                return new SuccessResult(Messages.Success);
+
             }
             else
             {
                 Console.WriteLine("Araba fiyatı 0'dan fazla olmalıdır");
-                return new SuccessResult(Messages.Success);
+                return new ErrorResult(Messages.Error);
+
             }
         }
 
@@ -63,14 +65,19 @@ namespace Business.Concrete
          
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetById(p => p.BrandId == id).ToList(), Messages.Success);
+            return new SuccessDataResult<Car>(_carDal.GetById(p => p.CarId == id), Messages.Success);
         }
 
-        public IDataResult<List<Car>>  GetCarsByColorId(int id)
+        public IDataResult<Car> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetById(p => p.ColorId == id).ToList())  ;
+            return new SuccessDataResult<Car>(_carDal.GetById(p => p.BrandId == id), Messages.Success);
+        }
+
+        public IDataResult<Car>  GetCarsByColorId(int id)
+        {
+            return new SuccessDataResult<Car>(_carDal.GetById(p => p.ColorId == id))  ;
         }
 
         public IResult Update(Car car)
@@ -78,5 +85,7 @@ namespace Business.Concrete
            _carDal.Update(car);
             return new Result(true, Messages.Success);
         }
+
+       
     }
 }
