@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             {
                 return BadRequest(result);
             }
-      
+
         }
         [HttpGet("getbyid")]
         public IActionResult GetByIdCars(int id)
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-            else { return BadRequest(result);}
+            else { return BadRequest(result); }
         }
         [HttpPost("add")]
         public IActionResult Add(Car car)

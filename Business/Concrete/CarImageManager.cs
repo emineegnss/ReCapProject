@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -12,28 +13,36 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageServices
     {
-        ICarDal _carDal;
+        ICarImageDal _carImageDal;
 
-        public CarImageManager(ICarDal carDal)
+        public CarImageManager(ICarImageDal carImageDal)
         {
-            _carDal = carDal;
+            _carImageDal = carImageDal;
         }
 
         public IResult Add(CarImage carImagee)
         {
-            throw new NotImplementedException();
+           _carImageDal.Add(carImagee);
+            return new SuccessResult(Messages.Success);
 
 
         }
 
         public IResult Delete(CarImage carImage)
         {
-            throw new NotImplementedException();
+            _carImageDal.Delete(carImage);
+            return new SuccessResult(Messages.Success);
+        }
+
+        public IDataResult<List<CarImage>> GetAllImages()
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(),Messages.Success);
         }
 
         public IResult Update(CarImage carImage)
         {
-            throw new NotImplementedException();
+            _carImageDal.Update(carImage);
+            return new SuccessResult(Messages.Success);
         }
     }
 }
