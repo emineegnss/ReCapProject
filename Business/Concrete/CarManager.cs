@@ -75,7 +75,7 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _carDal.Update(car);
-            return new Result(true, Messages.Success);
+            return new SuccessResult( Messages.Success);
         }
 
 
