@@ -30,7 +30,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Success);
         }
 
-        public IDataResult<List<CarDetailDto>> carDetailDtos()
+        public IDataResult<List<CarDetailDto>> GetCarDetail()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail(), Messages.Success);
         }

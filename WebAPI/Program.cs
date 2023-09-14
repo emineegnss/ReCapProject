@@ -16,6 +16,7 @@ namespace WebAPI
 
 
             builder.Services.AddControllers();
+            builder.Services.AddCors();
             //builder.Services.AddSingleton<ICarServices, CarManager>();
             //builder.Services.AddSingleton<ICarDal, EfCarDal>();
             //builder.Services.AddSingleton<IUserServices, UserManager>();
@@ -36,7 +37,7 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
