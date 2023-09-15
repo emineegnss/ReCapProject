@@ -23,17 +23,7 @@ namespace WebAPI.Controllers
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
-        [HttpGet("getfilebyid")]
-        public IActionResult GetFileById(int id)
-        {
-            var result = _carImageServices.GetByImageId(id);
-            if (result.Success)
-            {
-                var b = System.IO.File.ReadAllBytes(result.Data.ImagePath);
-                return File(b, "image/jpeg");
-            }
-            return BadRequest(result);
-        }
+       
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -49,24 +39,25 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add([FromForm] CarImage carImage, [FromForm(Name ="Image")] IFormFile file)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImageServices.Add(carImage, file);
+            var result = _carImageServices.Add(file, carImage);
             if (result.Success) return Ok(result);
             return BadRequest(result);
 
         }
         [HttpPost("update")]
-        public IActionResult Update([FromForm] CarImage carImage, [FromForm(Name = "Image")] IFormFile file)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImageServices.Update(carImage, file);
+            var result = _carImageServices.Update(file, carImage);
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
         [HttpPost("delete")]
         public IActionResult Delete(CarImage carImage)
         {
-            var result = _carImageServices.Delete(carImage);
+            var carDeleteImage = _carImageServices.GetByImageId(carImage.CarImageId).Data;
+            var result = _carImageServices.Delete(carDeleteImage);
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
