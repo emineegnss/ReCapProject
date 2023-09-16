@@ -27,6 +27,10 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>();
             builder.RegisterType<CarImageManager>().As<ICarImageServices>();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>();
+            builder.RegisterType<BrandManager>().As<IBrandServices>();
+            builder.RegisterType<EfBrandDal>().As<IBrandDal>();
+            builder.RegisterType<ColorManager>().As<IColorServices>();
+            builder.RegisterType<EfColorDal>().As<IColorDal>();
             builder.RegisterType<FileHelperManager>().As<IFileHelper>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
