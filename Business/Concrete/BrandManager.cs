@@ -44,7 +44,9 @@ namespace Business.Concrete
 
         public IResult Update(Brand brand)
         {
-            throw new NotImplementedException();
+
+            _brandDal.Update(brand);
+            return new SuccessResult();
         }
     }
 }
