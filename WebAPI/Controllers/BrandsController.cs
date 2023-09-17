@@ -7,45 +7,45 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorController : ControllerBase
+    public class BrandsController : ControllerBase
     {
-        IColorServices _colorServices;
+        IBrandServices _brandService;
 
-        public ColorController(IColorServices colorServices)
+        public BrandsController(IBrandServices brandService)
         {
-            _colorServices = colorServices;
+            _brandService = brandService;
         }
         [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var entity = _colorServices.GetAll();
+        public IActionResult GetAll() {
+             var entity =_brandService.GetAll();
             if (entity.Success)
             {
                 return Ok(entity);
             }
             return BadRequest();
-        }
 
+        }
         [HttpGet("getbyid")]
         public IActionResult Get(int id)
         {
-            var enity = _colorServices.GetCarsByBrandId(id);
-            if (enity.Success)
+            var entity = _brandService.GetCarsByBrandId(id);
+            if (entity.Success)
             {
-                return Ok(enity);
+               return Ok(entity);
             }
             return BadRequest();
         }
 
         [HttpPost("delete")]
-        public IActionResult Add(Color color)
-        {
-            var entity = _colorServices.Add(color);
+        public IActionResult Delete(Brand brand) {
+            var entity = _brandService.Delete(brand);
             if (entity.Success)
             {
-                return Ok(entity);
+                Ok(entity);
             }
             return BadRequest();
+
         }
+       
     }
 }
