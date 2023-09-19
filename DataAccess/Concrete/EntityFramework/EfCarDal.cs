@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
       
 
-        public List<CarDetailDto> GetCarDetail()
+        public List<CarDetailDto> GetCarDetail(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (CarDbContext context = new CarDbContext())
             {
@@ -26,9 +26,20 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cc in context.Colors
                              on c.ColorId equals cc.ColorId
+                             join carImage in context.CarImages on c.CarId equals carImage.CarId into Images
+                             from image in Images.DefaultIfEmpty()
                              select new CarDetailDto { BrandName = b.BrandName, CarId = c.CarId, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice , ColorName = cc.ColorName };
-                return result.ToList();
+                if(filter == null)
+                {
+                    return result.ToList();
+                }
+                else
+                {
+                    result = result.Where(filter);
+                    return result.ToList();
+                }
             }
         }
+
     }
 }
